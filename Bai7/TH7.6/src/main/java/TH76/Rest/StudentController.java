@@ -1,11 +1,12 @@
 package TH76.Rest;
 
+import TH76.Entity.ErrorResponse;
 import TH76.Entity.Student;
+import TH76.Exception.StudentException;
 import jakarta.annotation.PostConstruct;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,20 +34,42 @@ public class StudentController {
     //bai7.8 Path Variable
     @GetMapping("/{id}")
     public Student getStudent(@PathVariable int id){
+        Student result = null;
         for(Student st: list){
             if(st.getId() == id){
                 return st;
             }
         }
-        return null;
+        if(result == null){
+            throw new StudentException("Can't find student with "+id+" id");
+        }
+        return result;
     }
 
     @GetMapping("/index/{index}")
     public Student getStudentIndex(@PathVariable int index){
-        Student student = list.get(index);
-        return student;
+        Student result = null;
+        try {
+            result = list.get(index);
+        }catch(IndexOutOfBoundsException e){
+            throw new StudentException("Can't find student with index: "+index);
+        }
+        return result;
     }
     //ngoài ra còn có thể thêm nhìu biến path variable
     //vd: @GetMapping("/index/{index}/{v}/{t}")
     //    (@PathVariable int index, @PathVariable int v,....)
+
+    //B7.9
+    @ExceptionHandler
+    public ResponseEntity<ErrorResponse> catchError(StudentException stex) {
+        ErrorResponse er = new ErrorResponse(HttpStatus.NOT_FOUND.value(), stex.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(er);
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<ErrorResponse> catchAllError(Exception stex) {
+        ErrorResponse er = new ErrorResponse(HttpStatus.BAD_REQUEST.value(), stex.getMessage());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(er);
+    }
 }
