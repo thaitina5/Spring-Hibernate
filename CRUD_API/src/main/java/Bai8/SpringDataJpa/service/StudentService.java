@@ -11,4 +11,5 @@ public interface StudentService {
     public Student updateStudent(Student st);
     public void deleteStudentById(int id);
 
+    public List<Student> getAllStudentNotFirstName(String name);
 }

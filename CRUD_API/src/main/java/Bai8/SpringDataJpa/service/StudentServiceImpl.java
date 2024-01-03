@@ -45,4 +45,9 @@ public class StudentServiceImpl implements StudentService {
     public void deleteStudentById(int id) {
         this.studentRepository.deleteById(id);
     }
+
+    @Override
+    public List<Student> getAllStudentNotFirstName(String name) {
+        return studentRepository.findByFirstNameNot(name);
+    }
 }

@@ -25,6 +25,11 @@ public class StudentController {
         return this.studentService.getAllStudent();
     }
 
+    @GetMapping("/not-first-name/{name}")
+    public List<Student> getAllStudentNotFirstName(@PathVariable String name){
+        return this.studentService.getAllStudentNotFirstName(name);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<Student> getStudentById(@PathVariable int id){
          Student student = studentService.getStudentById(id);
