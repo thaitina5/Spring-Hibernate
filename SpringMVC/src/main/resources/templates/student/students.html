@@ -32,6 +32,10 @@
                     <a th:href="@{/students/update(id=${student.id})}"
                        class="btn btn-primary"
                     >Edit</a>
+                    <a th:href="@{/students/delete(id=${student.id})}"
+                       class="btn btn-danger"
+                       onclick="return confirm('Confirm delete?')"
+                    >Delete</a>
                 </td>
             </tr>
             </tbody>

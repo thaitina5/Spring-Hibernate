@@ -50,4 +50,10 @@ public class StudentController {
         model.addAttribute("student", student);
         return "student/students-form";
     }
+
+    @GetMapping("/delete")
+    public String delete(@RequestParam("id") Integer id){
+        studentService.deleteStudentById(id);
+        return "redirect:/students/list";
+    }
 }
