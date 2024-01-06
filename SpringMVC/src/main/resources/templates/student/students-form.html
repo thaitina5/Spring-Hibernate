@@ -10,6 +10,7 @@
   <h3>Quan ly sinh vien</h3>
   <hr/>
   <form action="#" th:action="@{/students/save}" th:object="${student}" method="POST">
+    <input type="hidden" th:field="*{id}">
     <input class="form-control w-30 mb-4" type="text" th:field="*{firstName}" placeholder="Ho dem" />
     <input class="form-control w-30 mb-4" type="text" th:field="*{lastName}" placeholder="Ten" />
     <input class="form-control w-50 mb-4" type="email" th:field="*{email}" placeholder="Email" />

@@ -40,7 +40,14 @@ public class StudentController {
 
     @PostMapping("/save")
     public String save(@ModelAttribute("student") Student student){
-        studentService.addStudent(student);
+        studentService.updateStudent(student);
         return "redirect:/students/list";
+    }
+
+    @GetMapping("/update")
+    public String update(@RequestParam("id") Integer id, Model model){
+        Student student = studentService.getStudentById(id);
+        model.addAttribute("student", student);
+        return "student/students-form";
     }
 }
