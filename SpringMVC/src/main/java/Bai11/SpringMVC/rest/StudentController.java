@@ -28,4 +28,19 @@ public class StudentController {
         model.addAttribute("students", students);
         return "student/students";
     }
+
+    @GetMapping("/create")
+    public String create(Model model){
+        Student student = new Student();
+        // attribute name phải trùng vs attribute object bên vỉew
+        // thì View và Controller ms tương tác vs nhau dc
+        model.addAttribute("student", student);
+        return "student/students-form";
+    }
+
+    @PostMapping("/save")
+    public String save(@ModelAttribute("student") Student student){
+        studentService.addStudent(student);
+        return "redirect:/students/list";
+    }
 }

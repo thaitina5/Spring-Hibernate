@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Student form</title>
+  <link rel="stylesheet" href="../css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+  <h3>Quan ly sinh vien</h3>
+  <hr/>
+  <form action="#" th:action="@{/students/save}" th:object="${student}" method="POST">
+    <input class="form-control w-30 mb-4" type="text" th:field="*{firstName}" placeholder="Ho dem" />
+    <input class="form-control w-30 mb-4" type="text" th:field="*{lastName}" placeholder="Ten" />
+    <input class="form-control w-50 mb-4" type="email" th:field="*{email}" placeholder="Email" />
+    <button class="btn btn-primary col-2" type="submit">Save</button>
+  </form>
+</div>
+
+<script src="../js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
