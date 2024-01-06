@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Student List</title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h3>Danh sach sinh vien</h3>
+        <hr/>
+        <table class="table table-bordered table-striped">
+            <thead class="table-info">
+            <tr>
+                <td>ID</td>
+                <td>Ho</td>
+                <td>Ten</td>
+                <td>Email</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="student : ${students}">
+                <td th:text="${student.id}" />
+                <td th:text="${student.firstName}" />
+                <td th:text="${student.lastName}" />
+                <td th:text="${student.email}" />
+
+            </tr>
+            </tbody>
+
+        </table>
+    </div>
+
+<script src="../js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
